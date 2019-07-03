@@ -45,11 +45,11 @@ $ oc login -u developer -p developer
 $ oc new-project MY_PROJECT_NAME
 ----
 
-. Change the directory to the folder that contains the extracted quickstart application (for example, `my_openshift/spring-boot-camel`) :
+. Change the directory to the folder that contains the extracted quickstart application (for example, `my_openshift/orders-poller`) :
 +
 [source,bash,options="nowrap",subs="attributes+"]
 ----
-$ cd my_openshift/spring-boot-camel
+$ cd my_openshift/orders-poller
 ----
 
 . Build and deploy the project to the OpenShift cluster:
@@ -60,9 +60,9 @@ $ mvn clean -DskipTests fabric8:deploy -Popenshift
 ----
 
 . In your browser, navigate to the `MY_PROJECT_NAME` project in the OpenShift console.
-Wait until you can see that the pod for the `spring-boot-camel` has started up.
+Wait until you can see that the pod for the `orders-poller` has started up.
 
-. On the project's `Overview` page, navigate to the details page deployment of the `spring-boot-camel` application: `https://OPENSHIFT_IP_ADDR:8443/console/project/MY_PROJECT_NAME/browse/rc/spring-boot-camel-NUMBER_OF_DEPLOYMENT?tab=details`.
+. On the project's `Overview` page, navigate to the details page deployment of the `orders-poller` application: `https://OPENSHIFT_IP_ADDR:8443/console/project/MY_PROJECT_NAME/browse/rc/orders-poller-NUMBER_OF_DEPLOYMENT?tab=details`.
 
 . Switch to tab `Logs` and then see the messages sent by Camel.
 

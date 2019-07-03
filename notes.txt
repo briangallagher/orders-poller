@@ -1,4 +1,4 @@
-https://github.com/fabric8-quickstarts/spring-boot-camel
+https://github.com/fabric8-quickstarts/orders-poller
 
 mvn clean package
 mvn spring-boot:run
