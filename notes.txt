@@ -1,0 +1,4 @@
+https://github.com/fabric8-quickstarts/spring-boot-camel
+
+mvn clean package
+mvn spring-boot:run
