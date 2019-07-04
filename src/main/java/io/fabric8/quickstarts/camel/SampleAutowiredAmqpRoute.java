@@ -22,6 +22,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.apache.camel.language.bean.BeanLanguage;
+import org.apache.camel.model.dataformat.JsonLibrary;
+import org.apache.camel.component.jackson.JacksonDataFormat;
+import io.fabric8.quickstarts.camel.Order;
 
 @Component
 public class SampleAutowiredAmqpRoute extends RouteBuilder {
@@ -40,40 +43,21 @@ public class SampleAutowiredAmqpRoute extends RouteBuilder {
         // from("file:src/main/data?noop=true")
         //     .to("amqp:queue:NEWSCIENCEQUEUE");
 
+        JacksonDataFormat jsonDataFormat = new JacksonDataFormat(Order.class);
+
         System.out.println("Reading 2....");
 
         from("ftp://epiz_23875282@ftpupload.net/htdocs/orders?password=dlqaAJwNoz&passiveMode=true")
         .log("after ftp")
         .filter().method("fileCheck", "check")
         .log("Processing ${id} "  + header("CamelFileName"))
+        .log("body:: ${body}")
+        .unmarshal(jsonDataFormat)
+        .marshal().json(JsonLibrary.Jackson)
+        // .setHeader("Content-Type", "application/json")
+        .setHeader("Content-Type").simple("application/json;charset=UTF-8")
         .to("amqp:queue:orders")
         .log("Route complete");
-
-
-        // from("timer://foo?fixedRate=true&period=10000").to("amqp:queue:orders");
-
-        // from("timer:bar")
-        //     .setBody(constant("Hello from Camel"))
-        //     .to("amqp:queue:orders");
-
-
-        // .bean(Foo.class, "setDetails(1, 'Camel')")
-
-        /*from("timer:bar")
-            .setBody(constant("Hello from Camel"))
-            .to("amqp:queue:SCIENCEQUEUE");*/
-
-
-        // ftpupload.net/htdocs/orders?username=epiz_23875282&password=dlqaAJwNoz
-
-        // from("ftp://rider.com/orders?username=rider&password=secret").
-        // process(new Processor() {                    
-        //     public void process(Exchange exchange) throws Exception {
-        //         System.out.println("We just downloaded: " + exchange.getIn().getHeader("CamelFileName"));
-        //     }
-        // }).
-        // to("jms:incomingOrders");
-
     }
 
     String[] files = {};
