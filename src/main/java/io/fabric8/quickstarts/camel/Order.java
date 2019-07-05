@@ -35,7 +35,7 @@ public class Order {
     }
 
     public void setQuantity(String item) {
-        this.quantity = quantity;
+        this.quantity = item;
     }    
 
 }
