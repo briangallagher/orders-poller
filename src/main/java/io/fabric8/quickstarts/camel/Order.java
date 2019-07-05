@@ -31,11 +31,11 @@ public class Order {
     }    
 
     public String getQuantity() {
-        return this.orderitem;
+        return this.quantity;
     }
 
     public void setQuantity(String item) {
-        this.quantity = quantity;
+        this.quantity = item;
     }    
 
 }
