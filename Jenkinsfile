@@ -1,6 +1,13 @@
 node('maven-appdev') {
 
 	def stashedArtifactName = 'orders-poller-archive'
+	def groupId;
+	def artifactId;
+	def version;
+	def devTag;
+	def testTag;
+	def prodTag;
+
 
     stage('Checkout Source') {
       echo 'Checkout Source'
@@ -9,14 +16,14 @@ node('maven-appdev') {
 
     stage('Set version') {
 
-      def groupId    = getGroupIdFromPom("pom.xml")
-      def artifactId = getArtifactIdFromPom("pom.xml")
-      def version    = getVersionFromPom("pom.xml")
+      groupId    = getGroupIdFromPom("pom.xml")
+      artifactId = getArtifactIdFromPom("pom.xml")
+      version    = getVersionFromPom("pom.xml")
       // Set the tag for the development image: version + build number
-      def devTag  = "${version}-${BUILD_NUMBER}"
-      def testTag  = "${version}-${BUILD_NUMBER}"
+      devTag  = "${version}-${BUILD_NUMBER}"
+      testTag  = "${version}-${BUILD_NUMBER}"
       // Set the tag for the production image: version
-      def prodTag = "${version}"
+      prodTag = "${version}"
       echo " Dev TAG: ${devTag}"
       echo " Test TAG: ${testTag}"
       echo " Prod TAG: ${prodTag}"
