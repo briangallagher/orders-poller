@@ -51,6 +51,7 @@ node('maven-appdev') {
 		  openshift.selector("bc/orders-poller").startBuild("--from-archive=./target/orders-poller-"+prodTag+".jar", "--wait")
           openshift.tag("arcadia-dev/orders-poller:latest", "arcadia-dev/orders-poller:" + devTag)
           openshift.tag("arcadia-dev/orders-poller:latest", "arcadia-test/orders-poller:" + testTag)
+          openshift.tag("arcadia-test/orders-poller:" + testTag, "arcadia-test/orders-poller:latest")
         }
    	  }
     }    
