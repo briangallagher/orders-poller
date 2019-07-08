@@ -66,6 +66,7 @@ node('maven-appdev') {
 
     stage('Deploy Image to Test') {
       echo 'Deploy Image to Test'
+	  deployToEnvironment(project: 'arcadia-test', env: 'test', appName: 'orders-poller')      
     }
 
     stage('UAT Testing') {
@@ -74,6 +75,7 @@ node('maven-appdev') {
 
     stage('Deploy Image to Production') {
       echo 'Deploy Image to Production'
+      // TODO: Blue / Green
     }
 }
 
@@ -118,7 +120,7 @@ def deployToEnvironment(Map params) {
 // 2. Creates a ConfigMap from the file
 //
 // 3. Applies the ConfigMap to the DeploymentConfig
-def call(Map params) {
+def setConfiguration(Map params) {
   echo "Updating envrionment variables ConfigMap in namespace ${params.namespace}"
   openshift.withCluster() {
     openshift.withProject() {
