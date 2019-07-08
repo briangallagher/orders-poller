@@ -48,8 +48,9 @@ node('maven-appdev') {
       openshift.withCluster() {
         openshift.withProject('arcadia-dev') {
 
-		  openshift.selector("bc/orders-poller").startBuild("--from-archive=orders-poller-"+prodTag+".jar", "--wait")
+		  openshift.selector("bc/orders-poller").startBuild("--from-archive=./target/orders-poller-"+prodTag+".jar", "--wait")
           openshift.tag("arcadia-dev/orders-poller:latest", "arcadia-dev/orders-poller:" + devTag)
+          openshift.tag("arcadia-dev/orders-poller:latest", "arcadia-test/orders-poller:" + testTag)
         }
    	  }
     }    
