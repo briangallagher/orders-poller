@@ -57,7 +57,7 @@ node('maven-appdev') {
 
     stage('Deploy Image to Dev') {
       echo 'Deploy Image to Dev'
-      deployToEnvironment(project: 'arcadia-dev', env: 'dev', appName: 'orders-poller')
+      deployToEnvironment(project: 'arcadia', env: 'dev', appName: 'orders-poller')
     }
 
     stage('Integration Testing') {
@@ -66,7 +66,7 @@ node('maven-appdev') {
 
     stage('Deploy Image to Test') {
       echo 'Deploy Image to Test'
-	  deployToEnvironment(project: 'arcadia-test', env: 'test', appName: 'orders-poller')      
+	  deployToEnvironment(project: 'arcadia', env: 'test', appName: 'orders-poller')      
     }
 
     stage('UAT Testing') {
